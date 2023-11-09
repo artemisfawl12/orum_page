@@ -1,0 +1,584 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+  </script>
+
+
+
+
+  <title>ORUM</title>
+</head>
+
+<style>
+.navbar-fix{
+    position:fixed;
+    width:100%;
+}
+.main_body {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    background-color:#FAFAFA;
+}
+
+.left_body {
+    background-color: white;
+    margin-right: 100px;
+
+    width: 500px;
+    height: 2000px;
+    display: flex;
+    padding-top:30px;
+    flex-direction: column;
+}
+
+.right_body {
+    {#background-color: yellow;}
+    padding-top: 20px;
+    width: 400px;
+    height: 1000px;
+    left: 72%;
+    position: fixed
+}
+
+.feed_box {
+    background-color:white;
+    width:480px;
+    margin:10px;
+    object-fit:contain;
+    }
+.feed_img{
+    width: 100%;
+    object-fit: contain;
+}
+
+.feed_content{
+    padding: 0px 10px;
+}
+
+.feed_like{
+    padding: 0px 10px;
+}
+
+.feed_reply{
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.feed_txt{
+    font-size: 14px;
+}
+
+.feed_icon{
+    padding: 5px 5px 0px 5px;
+    display: flex;
+    justify-content: space-between;
+}span{
+     padding-right: 5px;
+ }
+.feed_name{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.feed_name_txt{
+    font-size: 14px;
+    padding: 0px 10px;
+    font-weight: bold;
+}
+
+.profile_box {
+    width: 40px;
+    height: 40px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile_box {
+    width: 40px;
+    height: 40px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name_content{
+    display: flex;
+    flex-direction: column;
+}
+
+.name_content_txt{
+    font-size: 12px;
+    padding: 0px 10px;
+    font-weight: bold;
+    color: lightgray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 190px;
+}
+
+.big_profile_box {
+    width: 60px;
+    height: 60px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+
+.link_txt{
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.recommend_box {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    align-items: center;
+}
+
+.comment_box{
+    margin: 40px 0 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: lightgray;
+    display: flex;
+    flex-direction: column;
+}
+.custom-button {
+    background-color: #FAFAFA;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    outline: none;
+}
+
+/* 버튼에 호버(마우스 오버) 효과를 추가합니다 */
+.custom-button:hover {
+    background-color: #b4b4b4;
+}
+.modal_overlay{
+    width:100%;
+    height:100%;
+    display:none;
+    position:absolute;
+    left:0;
+    top:0;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(1.8px);
+    -webkit-backdrop-filter:blur(1.5px);
+}
+.modal_window {
+    background: white;
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 800px;
+    height: 600px;
+    position: relative;
+    padding: 10px;
+}
+.modal_title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal_title_side{
+    flex: 0 0 40px;
+    text-align: center;
+}
+.modal_image_upload{
+    outline: 2px dashed black ;
+    outline-offset:-10px;
+    text-align: center;
+    transition: all .15s ease-in-out;
+    width:780px;
+    height: 548px;
+}
+.modal_image_upload_content{
+    outline: 2px dashed black ;
+    outline-offset:-10px;
+    text-align: center;
+    transition: all .15s ease-in-out;
+    width:500px;
+    height: 548px;
+}
+
+.modal_image_content{
+    display: flex;
+    flex-direction: row;
+}
+
+.modal_content_write{
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(0, 0, 0, 0.18);;
+}
+
+.feed_content_textarea{
+    resize: none;
+    width: 294px;
+    border: none;
+}
+
+</style>
+
+<body onload="loginCheck()">
+
+<nav class="navbar-fix navbar navbar-expand-lg navbar-light bg-light ">
+  <div class="container">
+    <ul class="navbar-nav d-flex justify-content-between">
+        <a href="/"><img style="height:35px; object-fit:contain; margin-right:15px;margin-left:15px;"
+            src="{% static 'orumlogo.png' %}"></a>
+        <li class="nav-item">
+          <a class="nav-link" href="#">about us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">세션 파일</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">활동 사진</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">공모전</a>
+        </li>
+        <li class="nav-item">
+          <span id="add_feed_1" class="nav-link custom-button">글쓰기</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="login_join_button" href="login" style="display:block">
+          </a>
+      </ul>
+    <input class="form-control" style="width:300px; margin-right:15px; display:none;" type="search" placeholder="Search" aria-label="Search">
+  </div>
+</nav>
+
+<div class="main_body">
+    <div class="left_body">
+        <p>허허</p>
+        <b> 여기에 오름이 어쩌고 저쩌고 적으면 됨</b>
+
+
+
+
+    </div>
+
+
+    <div class="right_body">
+        <div class="feed_name" style="justify-content: space-between">
+          <div style="display: flex; align-items: center; ">
+            <div class="big_profile_box">
+              <img class="profile_img"
+                   src="https://i.namu.wiki/i/mqoLQXrY1PDBSXSMkyd4NfOoKCeV4uDk9QyYUXo-ynG0K2wRwoMcmoBjqAytXjnJoRAwLfPuuBLIgW7_ZhUCnLk7VRBifaTevI2UFZfnNAj5sVbU4jyCV1Ws78yzyy6105PXKyyaAoIYa4X8xj4kkQ.webp">
+            </div>
+            <div class="name_content">
+              <span class="feed_name_txt"> {{user.user_id}}</span>
+              <span class="name_content_txt">{{user.name}}</span>
+            </div>
+          </div>
+
+          <button class="custom-button" id="logout_button" >
+            로그아웃
+          </button>
+        </div>
+
+        <div class="comment_box">
+          <span> ORUM 페이지 담당자</span>
+          <span> 010-9907-3749 </span>
+          <br>
+          <span> @2023. 11. 09</span>
+
+        </div>
+  </div>
+</div>
+<div id="modal_add_feed" class="modal_overlay">
+    <div class="modal_window">
+        <div class="modal_title">
+            <div class="modal_title_side"></div>
+            <div> 새 게시물 </div>
+            <div class="modal_title_side">
+                <span id="close_modal" class="material-icons-outlined custom-button">
+                    close
+                </span>
+            </div>
+        </div>
+        <div class="modal_image_upload">
+
+        </div>
+    </div>
+</div>
+
+<div id="modal_add_feed_content" class="modal_overlay">
+    <div class="modal_window">
+        <div class="modal_title">
+            <div class="modal_title_side"></div>
+            <div style="margin:5px"> 새 게시물 </div>
+            <div class="modal_title_side">
+                <span id="close_modal_content" class="material-icons-outlined custom-button">
+                    close
+                </span>
+            </div>
+        </div>
+        <div class="modal_image_content">
+            <div id="input_image" class="modal_image_upload_content">
+
+            </div>
+            <div class="modal_content_write">
+                <div class="feed_name">
+                    <div class="profile_box">
+                        <img id="input_profile_image" class="profile_img" src="https://i.namu.wiki/i/mqoLQXrY1PDBSXSMkyd4NfOoKCeV4uDk9QyYUXo-ynG0K2wRwoMcmoBjqAytXjnJoRAwLfPuuBLIgW7_ZhUCnLk7VRBifaTevI2UFZfnNAj5sVbU4jyCV1Ws78yzyy6105PXKyyaAoIYa4X8xj4kkQ.webp">
+
+                    </div>
+                    <span id="input_user_id" class="feed_name_txt">
+                        {{user.name}}
+                    </span>
+                </div>
+                <div style="height: 440px">
+                    <textarea id="input_content" class="feed_context_textarea form-control col-sm-5"
+                              rows="10" placeholder="설명 입력"></textarea>
+
+                </div>
+                <div style="width:100%; text-align: center;">
+                    <button id="button_write_feed" type="button" class="btn btn-primary" style="width:268px">공유하기</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+<script>
+    //로그인 여부 확인:
+    const login_join_button = $("#login_join_button");
+    const loginjoin_btn=document.getElementById("login_join_button")
+    var rightBodyElement = document.querySelector('.right_body');
+    const buttonAddFeed = document.getElementById("add_feed_1");
+
+function loginCheck() {
+    $.ajax({
+        url: '/get_session_data/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            if (data.loginCheck) {
+                loginjoin_btn.innerText='';
+                console.log("로그인되어 있음");
+                rightBodyElement.style.display = 'block';
+                buttonAddFeed.style.display='block';
+
+            } else {
+                loginjoin_btn.innerText='login/join us';
+                console.log("로그인되어 있지 않음");
+                rightBodyElement.style.display = 'none';
+                buttonAddFeed.style.display='none';
+            }
+        },
+        error: function (xhr, status, error) {
+            loginjoin_btn.innerText='login/join us';
+            console.log("loginCheck(): error")
+            console.error(error);
+        }
+    })
+};
+
+    //로그아웃 버튼
+    const logout_button=document.getElementById("logout_button")
+    logout_button.addEventListener("click", ()=>{
+        window.location.href="logout"
+    })
+
+    const modal = document.getElementById("modal_add_feed");
+    const modal_content=document.getElementById("modal_add_feed_content");
+
+    buttonAddFeed.addEventListener("click", e => {
+        modal.style.top=window.pageYOffset+"px"
+        modal.style.display = "flex";
+        document.body.style.overflow="hidden";
+        console.log(window.pageYOffset+"위치");
+    });
+    const buttoncloseModal=document.getElementById("close_modal");
+    buttoncloseModal.addEventListener("click",e => {
+        modal.style.display="none";
+        document.body.style.overflow="visible";
+
+    });
+    const buttonclosecontentModal=document.getElementById("close_modal_content");
+    buttonclosecontentModal.addEventListener("click",e => {
+        modal.style.display="none";
+        modal_content.style.display="none";
+        document.body.style.overflow="visible";
+
+    });
+    function closeModal() {
+        $('.modal').css({
+            display : 'none'
+        });
+        $(document.body).css({
+            overflowY : 'visible'
+        });
+    };
+
+
+    $('.modal_image_upload')
+        .on("dragover", dragOver)
+        .on("dragleave", dragOver)
+        .on("drop", uploadFiles);
+
+    function dragOver(e){
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (e.type == "dragover") {
+            $(e.target).css({
+                "background-color": "black",
+                "outline-offset": "-20px"
+            });
+        } else {
+            $(e.target).css({
+                "background-color": "white",
+                "outline-offset": "-10px"
+            });
+        }
+    }
+    let files;
+    function uploadFiles(e){
+        e.stopPropagation();
+        e.preventDefault();
+
+        e.dataTransfer = e.originalEvent.dataTransfer;
+        files =  e.dataTransfer.files;
+
+        if (files.length > 1) {
+            alert('하나만 올려라.');
+            return;
+        }
+
+        if (files[0].type.match(/image.*/)) {
+            $('#modal_add_feed_content').css({
+                display:'flex'
+            })
+            $('.modal_image_upload_content').css({
+                "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                "outline": "none",
+                "background-size": "contain",
+                "background-repeat" : "no-repeat",
+                "background-position" : "center"
+            });
+            $('#modal_add_feed').css({
+                display: 'none'
+            })
+        }else{
+            alert('이미지가 아닙니다.');
+            return;
+        }
+
+    }
+    $('#button_write_feed').on('click',()=>{
+        const image = $('#input_image').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
+        const content = $('#input_content').val();
+        const profile_image = $('#input_profile_image').attr('src');
+        const user_id = $('#input_user_id').text();
+
+        const file=files[0]
+        console.log("button clicked");
+
+        let fd = new FormData();
+
+        fd.append('file', file);
+        fd.append('image', image);
+        fd.append('content', content);
+        fd.append('profile_image', profile_image);
+        fd.append('user_id', user_id);
+
+        if(image.length <= 0)
+        {
+            alert("이미지가 비어있습니다.");
+        }
+        else if(content.length <= 0)
+        {
+            alert("설명을 입력하세요");
+        }
+        else if(profile_image.length <= 0)
+        {
+            alert("프로필 이미지가 비어있습니다.");
+        }
+        else if(user_id.length <= 0)
+        {
+            alert("사용자 id가 없습니다.");
+        }
+        else{
+            writeFeed(fd);
+            console.log(files[0]);
+        }
+
+    });
+    function writeFeed(fd) {
+        $.ajax({
+            url: "/content/upload",
+            data: fd,
+            method: "POST",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log("성공");
+            },
+            error: function (request, status, error) {
+                console.log("에러");
+            },
+            complete: function() {
+                console.log("무조건실행");
+                closeModal();
+                location.reload();
+            }
+        })
+    };
+
+
+</script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+-->
+
+
+</body>
+</html>
