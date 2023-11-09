@@ -4,3 +4,4 @@ djangorestframework==3.14.0
 pytz==2022.6
 sqlparse==0.4.3
 typing-extensions==4.4.0
+>>>>>>> 053ee79eb22146101674fc68609e98fb4182d4e6
