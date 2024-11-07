@@ -23,8 +23,10 @@
 <br>
 이미지 포함된 글을 올릴 수 있어요.
 <br>
-
-<img src="https://github.com/user-attachments/assets/5b785620-b701-42ce-8c06-034561e71c4c" width="50%" height="50%" />
+<img src="https://github.com/user-attachments/assets/76bbb781-93ea-439e-a47d-2ec8fe3475fc" width="50%" height="50%" />
+<br>
+위와같은 박스에 이미지를 올리면 됩니다.
+<br>
 
 
 
